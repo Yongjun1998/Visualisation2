@@ -1,1 +1,24 @@
+#WorldCup_Map {
+	left: 100px;
+ 	right: 100px; 
+	/*height: 400px
+	width: 300px;*/
+}
+#WorldCup_Bar {
+	left: 100px;
+	right: 100px;
+	/*height: 1000px;
+	width: 800px;*/
+}
+#WorldCup_Bubble {
+	left: 100px;
+	right: 100px;
+	/*height: 1000px;
+	width: 800px;*/
+}
 
+
+
+body{
+    font-family: 'Source Sans Pro', sans-serif;
+}
