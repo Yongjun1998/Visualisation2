@@ -1,0 +1,89 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "title": "Comparison of the number of matches played by each team and the total number of matches played after 2000",
+  "width": 800,
+  "height": 400,
+  "data": {
+    "url": "https://raw.githubusercontent.com/Yongjun1998/Visualisation2/main/data/WorldCupMatches.csv"
+  },
+  "transform": [
+    {
+      "calculate": "datum.match_count_after_2000/datum.match_count",
+      "as": "New_Century_competition_Ratio"
+    }
+  ],
+  "mark": "circle",
+  "encoding": {
+    "x": {
+      "field": "match_count",
+      "type": "quantitative",
+      "title": "Total Match",
+      "axis": {"tickCount": 3},
+      "scale": {"type": "ordinal", "domain": [1, 150]}
+    },
+    "y": {
+      "field": "match_count_after_2000",
+      "type": "quantitative",
+      "axis": {"tickCount": 4},
+      "scale": {"type": "ordinal", "domain": [1, 40]}
+    }
+  },
+  "layer": [
+    {
+      "mark": "circle",
+      "encoding": {
+        "size": {
+          "field": "New_Century_competition_Ratio",
+          "type": "quantitative",
+          "scale": {"type": "threshold", "domain": [0.2, 0.4, 0.6, 0.8]},
+          "legend": {"format": ".2s"}
+        },
+        "color": {
+          "field": "New_Century_competition_Ratio",
+          "type": "quantitative",
+          "scale": {"type": "threshold", "domain": [0.2, 0.4, 0.6, 0.8]}
+        },
+        "tooltip": [
+          {"field": "Country_and_region", "type": "nominal"},
+          {"field": "match_count", "type": "quantitative"},
+          {"field": "match_count_after_2000", "type": "quantitative"},
+          {
+            "field": "New_Century_competition_Ratio",
+            "type": "quantitative",
+            "format": ".2f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "baseline": "middle",
+        "fontSize": 8,
+        "fontStyle": "italic"
+      },
+      "encoding": {
+        "text": {"field": "Country_and_region", "type": "nominal"},
+        "color": {"value": "black"},
+        "opacity": {
+          "condition": {
+            "test": "datum['Country_and_region'] == 'England' || datum['Country_and_region'] =='Japan' || datum['Country_and_region'] == 'Australia' || datum['Country_and_region'] == 'Argentina' || datum['Country_and_region'] == 'Italy' || datum['Country_and_region'] == 'Brazil' || datum['Country_and_region'] == 'USA' || datum['Country_and_region'] == 'Germany' || datum['Country_and_region'] == 'Portugal'",
+            "value": 1
+          },
+          "value": 0
+        }
+      },
+      "tooltip": [
+        {"field": "Country_and_region", "type": "nominal"},
+        {"field": "match_count", "type": "quantitative"},
+        {"field": "match_count_after_2000", "type": "quantitative"},
+        {
+          "field": "New_Century_competition_Ratio",
+          "type": "quantitative",
+          "format": ".2f"
+        }
+      ]
+    }
+  ],
+  "config": {}
+}
