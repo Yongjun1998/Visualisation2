@@ -23,7 +23,7 @@
   <div id="WorldCup_Bar"></div>
   
   <h2>Matches per country after 2000</h2>
-  <div id="WorldCup_Bar"></div>
+  <div id="WorldCup_bubble"></div>
 
 <script type="text/javascript">
 
@@ -38,7 +38,7 @@
   }).catch(console.error);
   
     var spec3 = "js/WorldCup_bubble.vl.json";
-  vegaEmbed('#WorldCup_Bar', spec3).then(function(result) {
+  vegaEmbed('#WorldCup_bubble', spec3).then(function(result) {
     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
   }).catch(console.error);
   
