@@ -1,18 +1,18 @@
 #WorldCup_Map {
-	left: 200px;
- 	right: 200px; 
+	left: 400px;
+ 	right: 100px; 
 	/*height: 400px
 	width: 300px;*/
 }
 #WorldCup_Bar {
-	left: 200px;
-	right: 200px;
+	left: 400px;
+	right: 100px;
 	/*height: 1000px;
 	width: 800px;*/
 }
 #WorldCup_Bubble {
-	left: 200px;
-	right: 200px;
+	left: 400px;
+	right: 100px;
 	/*height: 1000px;
 	width: 800px;*/
 }
