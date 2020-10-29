@@ -1,0 +1,55 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "title": "FIFA World cup medals for countries",
+  "width": 800,
+  "height": 400,
+  "data": {
+    "url": "https://raw.githubusercontent.com/Yongjun1998/Visualisation2/main/js/world.geo.json",
+    "format": {"type": "topojson", "feature": "world"}
+  },
+  "projection": {"type": "equalEarth"},
+  "mark": {"type": "geoshape", "stroke": "lightgray"},
+  "transform": [
+    {
+      "lookup": "properties.name",
+      "from": {
+        "data": {
+          "url": "https://raw.githubusercontent.com/Yongjun1998/Visualisation2/main/data/WorldCups.csv"
+        },
+        "key": "Country_and_region",
+        "fields": [
+          "Number_of_MEDALS",
+          "Number_of_Championships",
+          "Number_of_Runners-Up",
+          "Number_of_Third",
+          "Number_of_Fourth"
+        ]
+      }
+    },
+    {"calculate": "datum.Number_of_MEDALS", "as": "number of medals"}
+  ],
+  "encoding": {
+    "color": {
+      "field": "number of medals",
+      "type": "quantitative",
+      "scale": {
+        "type": "threshold",
+        "domain": [1, 5, 10],
+        "range": ["#ffffcc", "#a1dab4", "#2c7fb8", "#253494"]
+      }
+    },
+    "tooltip": [
+      {"field": "properties.name", "type": "nominal", "title": "country"},
+      {
+        "field": "Number_of_MEDALS",
+        "type": "quantitative",
+        "title": "Number of Medals"
+      },
+      {"field": "Number_of_Championships", "type": "quantitative"},
+      {"field": "Number_of_Runners-Up", "type": "quantitative"},
+      {"field": "Number_of_Third", "type": "quantitative"},
+      {"field": "Number_of_Fourth", "type": "quantitative"}
+    ]
+  },
+  "config": {}
+}
