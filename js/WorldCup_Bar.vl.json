@@ -1,0 +1,109 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "title": "Attendance Of Each World Cup",
+  "width": 800,
+  "height": 400,
+  "data": {
+    "url": "https://raw.githubusercontent.com/Yongjun1998/Visualisation2/main/data/WorldCups.csv"
+  },
+  "params": [
+    {
+      "name": "host_country_selection",
+      "bind": {
+        "input": "select",
+        "options": [
+          null,
+          "Uruguay",
+          "Italy",
+          "France",
+          "Brazil",
+          "Switzerland",
+          "Sweden",
+          "Chile",
+          "England",
+          "Mexico",
+          "Germany",
+          "Argentina",
+          "Spain",
+          "USA",
+          "Korea/Japan",
+          "South Africa"
+        ],
+        "labels": [
+          "Show all",
+          "Uruguay",
+          "Italy",
+          "France",
+          "Brazil",
+          "Switzerland",
+          "Sweden",
+          "Chile",
+          "England",
+          "Mexico",
+          "Germany",
+          "Argentina",
+          "Spain",
+          "USA",
+          "Korea/Japan",
+          "South Africa"
+        ],
+        "name": "Host Country Choose:"
+      }
+    }
+  ],
+  "transform": [
+    {"filter": "datum.Year>=1930"},
+    {
+      "filter": "host_country_selection == null || datum.Country == host_country_selection"
+    }
+  ],
+  "encoding": {
+    "x": {"field": "Year", "type": "nominal"},
+    "y": {"field": "Attendance", "type": "quantitative"}
+  },
+  "layer": [
+    {
+      "selection": {
+        "Year_highlight": {
+          "type": "multi",
+          "fields": ["Year"],
+          "bind": "legend"
+        }
+      },
+      "mark": "bar",
+      "encoding": {
+        "color": {"field": "Year", "type": "nominal"},
+        "opacity": {
+          "condition": {"selection": "Year_highlight", "value": 0.8},
+          "value": 0.2
+        },
+        "tooltip": [
+          {"field": "Country", "type": "nominal"},
+          {"field": "Year", "type": "nominal"},
+          {"field": "Attendance", "type": "quantitative", "format": ".2f"},
+          {"field": "Winner", "type": "nominal"}
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "baseline": "alphabetic",
+        "fontSize": 12,
+        "fontStyle": "italic"
+      },
+      "encoding": {
+        "text": {"field": "Attendance", "type": "nominal"},
+        "color": {"value": "black"},
+        "opacity": {
+          "condition": {
+            "test": "datum['Attendance'] == 3587.538 || datum['Attendance'] ==3386.81 || datum['Attendance'] ==363",
+            "value": 1
+          },
+          "value": 0
+        }
+      }
+    }
+  ],
+  "config": {}
+}
